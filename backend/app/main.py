@@ -1,14 +1,8 @@
-from fastapi import FastAPI
-from db.session import SessionLocal, engine
+from sqlalchemy import create_engine, inspect
 
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello, Expence Tracker!"}
-
+from app.core.config import DATABASE_URL
 
 if __name__ == "__main__":
-    print(engine.url)
-    print(SessionLocal)
+    engine = create_engine(DATABASE_URL)
+    insp = inspect(engine)
+    print(insp.get_table_names())

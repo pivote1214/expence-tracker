@@ -1,0 +1,21 @@
+{
+    "name": "backend-dev",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "service": "backend",
+    "runServices": [
+        "backend",
+        "db"
+    ],
+    "workspaceFolder": "/app/backend",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "charliermarsh.ruff"
+            ]
+        }
+    }
+}

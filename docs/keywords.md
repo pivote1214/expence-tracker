@@ -1,0 +1,13 @@
+- Docker
+  - Dockerfile
+  - docker-compose.yml
+- SQLAlchemy
+- Alembic
+- MySQL
+- PostgreSQL
+- SQLite
+- FastAPI
+- Tailwind CSS
+- React
+- TypeScript
+- JavaScript

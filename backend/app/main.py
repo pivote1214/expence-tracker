@@ -1,8 +1,12 @@
-from sqlalchemy import create_engine, inspect
+from fastapi import FastAPI
 
-from app.core.config import DATABASE_URL
+from app.api import user, expense
 
-if __name__ == "__main__":
-    engine = create_engine(DATABASE_URL)
-    insp = inspect(engine)
-    print(insp.get_table_names())
+app = FastAPI()
+
+app.include_router(user.router, prefix="/api", tags=["users"])
+app.include_router(expense.router, prefix="/api", tags=["expense"])
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the FastAPI application!"}

@@ -1,3 +1,4 @@
+from datetime import date
 from typing import TYPE_CHECKING
 
 from sqlalchemy import Date, Float, ForeignKey, Integer, String
@@ -20,5 +21,21 @@ class Expense(BaseModel):
     payment_date: Mapped[Date] = mapped_column(Date, nullable=False)
     ratio: Mapped[float] = mapped_column(Float, nullable=False)
 
-    payer_id: Mapped[str] = mapped_column(ForeignKey("user.id"))
+    payer_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     user: Mapped["User"] = relationship(back_populates="expenses")
+
+    def __init__(
+        self,
+        title: str,
+        detail: str,
+        amount: str,
+        payment_date: date,
+        ratio: float,
+        payer_id: int,
+    ):
+        self.title = title
+        self.detail = detail
+        self.amount = amount
+        self.payment_date = payment_date
+        self.ratio = ratio
+        self.payer_id = payer_id

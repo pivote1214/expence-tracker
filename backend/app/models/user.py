@@ -19,3 +19,8 @@ class User(BaseModel):
     password: Mapped[str] = mapped_column(String, nullable=False)
 
     expenses: Mapped[list["Expense"]] = relationship(back_populates="user")
+
+    def __init__(self, username: str, email: str, password: str):
+        self.username = username
+        self.email = email
+        self.password = password

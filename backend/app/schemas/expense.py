@@ -5,7 +5,7 @@ from app.schemas.base import BaseSchema
 
 class ExpenseCreate(BaseSchema):
     title: str
-    detail: str | None
+    detail: str | None = None
     amount: int
     payment_date: date
     ratio: float

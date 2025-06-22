@@ -1,11 +1,11 @@
 import React from "react";
 import type { UseFormRegister } from "react-hook-form";
-import type { ExpenseFormData } from "./ExpenseForm";
+import type { CreateExpenseRequest } from "../types";
 
 type FormFieldProps = {
   label: string;
-  name: keyof ExpenseFormData;
-  register: UseFormRegister<ExpenseFormData>;
+  name: keyof CreateExpenseRequest;
+  register: UseFormRegister<CreateExpenseRequest>;
   isRequired: boolean;
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
   error?: string;

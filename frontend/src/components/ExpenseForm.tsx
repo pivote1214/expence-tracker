@@ -3,24 +3,16 @@ import type { SubmitHandler } from "react-hook-form";
 import { FormField } from "./FormField";
 import { SubmitButton } from "./SubmitButton";
 import { postExpense } from "../api/expense";
-
-export type ExpenseFormData = {
-  title: string;
-  detail: string;
-  amount: number;
-  paymentDate: string;
-  ratio: number;
-  payerId: string;
-};
+import type { CreateExpenseRequest } from "../types";
 
 export default function FormExpense() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ExpenseFormData>();
+  } = useForm<CreateExpenseRequest>();
 
-  const onSubmit: SubmitHandler<ExpenseFormData> = (formInput) => {
+  const onSubmit: SubmitHandler<CreateExpenseRequest> = (formInput) => {
     postExpense(formInput);
   };
 

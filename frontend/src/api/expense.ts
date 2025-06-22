@@ -1,6 +1,8 @@
-import type { ExpenseFormData } from "../components/ExpenseForm";
+import type { CreateExpenseRequest } from "../types";
 
-export async function postExpense(formInput: ExpenseFormData): Promise<void> {
+export async function postExpense(
+  formInput: CreateExpenseRequest
+): Promise<void> {
   // jsonに変換
   const jsonFormInput = JSON.stringify(formInput);
   alert(jsonFormInput);

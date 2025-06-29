@@ -4,6 +4,9 @@ import { FormField } from "./FormField";
 import { SubmitButton } from "./SubmitButton";
 import { postExpense } from "../api/expense";
 import type { CreateExpenseRequest } from "../types";
+import { SelectField } from "./SelectField";
+import { getUsers } from "../api/user";
+import { useEffect, useState } from "react";
 
 export default function FormExpense() {
   const {
@@ -11,6 +14,25 @@ export default function FormExpense() {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateExpenseRequest>();
+
+  const [userOptions, setUserOptions] = useState<
+    {
+      value: number;
+      label: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const users = await getUsers();
+      const options = users.map((user) => ({
+        value: user.id,
+        label: user.username,
+      }));
+      setUserOptions(options);
+    };
+    fetchUsers();
+  }, []);
 
   const onSubmit: SubmitHandler<CreateExpenseRequest> = (formInput) => {
     postExpense(formInput);
@@ -24,49 +46,52 @@ export default function FormExpense() {
       <FormField
         label="タイトル"
         name="title"
+        type="text"
         register={register}
         isRequired={true}
-        type="text"
         error={errors.title?.message}
       />
       <FormField
         label="詳細"
         name="detail"
+        type="text"
         register={register}
         isRequired={false}
-        type="text"
         error={errors.detail?.message}
       />
       <FormField
         label="合計金額"
         name="amount"
+        type="number"
         register={register}
         isRequired={true}
-        type="number"
+        min={0}
         error={errors.amount?.message}
       />
       <FormField
         label="支払日"
         name="paymentDate"
+        type="date"
         register={register}
         isRequired={true}
-        type="date"
         error={errors.paymentDate?.message}
       />
       <FormField
-        label="比率"
+        label="自分から見た負担割合（0~1）"
         name="ratio"
+        type="number"
         register={register}
         isRequired={true}
-        type="number"
+        min={0}
+        max={1}
         error={errors.ratio?.message}
       />
-      <FormField
+      <SelectField
         label="支払い者"
         name="payerId"
+        options={userOptions}
         register={register}
         isRequired={true}
-        type="text"
         error={errors.payerId?.message}
       />
 

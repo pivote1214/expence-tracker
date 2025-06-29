@@ -4,5 +4,5 @@ export type CreateExpenseRequest = {
   amount: number;
   paymentDate: string;
   ratio: number;
-  payerId: string;
+  payerId: number;
 };
